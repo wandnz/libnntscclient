@@ -2,7 +2,7 @@ Source: libnntsc-client
 Section: libs
 Priority: optional
 Maintainer: Brendon Jones <brendonj@waikato.ac.nz>
-Build-Depends: debhelper (>= 9.0.0), dh-python, python, python-pkg-resources, python-setuptools
+Build-Depends: debhelper (>= 9.0.0), dh-python, python3-all, python3-pkg-resources, python3-setuptools
 Standards-Version: 3.9.3
 Homepage: http://wand.net.nz/projects/details/storage-network-monitoring-and-measurement-data
 #Vcs-Git: git://git.debian.org/collab-maint/nntsc.git
@@ -10,7 +10,7 @@ Homepage: http://wand.net.nz/projects/details/storage-network-monitoring-and-mea
 
 Package: libnntsc-client
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python3:Depends}
 Description: Client API for NNTSC time series collector
  Client API that allows other programs to connect to the NNTSC
  measurement database and either ask for historical data or register

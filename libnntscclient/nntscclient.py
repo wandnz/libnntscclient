@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # This file is part of libnntscclient.
 #
@@ -32,6 +32,7 @@
 
 import struct
 import pickle
+import zlib
 from socket import *
 from libnntscclient.protocol import *
 import libnntscclient.logger as logger
@@ -39,7 +40,7 @@ import libnntscclient.logger as logger
 class NNTSCClient:
     def __init__(self, sock):
         self.sock = sock
-        self.buf = ""
+        self.buf = b""
 
     def disconnect(self):
         if self.sock != None:
@@ -65,8 +66,8 @@ class NNTSCClient:
 
         try:
             self.sock.sendall(header + request)
-        except error, msg:
-            logger.log("Error sending NNTSC_REQUEST %d for collection %d: %s" % (reqtype, col, msg[1]))
+        except error:
+            logger.log("Error sending NNTSC_REQUEST %d for collection %d: %s" % (reqtype, col, error))
             return -1
 
         return 0
@@ -87,8 +88,8 @@ class NNTSCClient:
 
         try:
             self.sock.sendall(header + contents)
-        except error, msg:
-            logger.log("Error sending NNTSC_SUBSCRIBE for %s: %s" % (name, msg[1]))
+        except error:
+            logger.log("Error sending NNTSC_SUBSCRIBE for %s: %s" % (name, error))
             return -1
 
         return 0
@@ -103,8 +104,8 @@ class NNTSCClient:
 
         try:
             self.sock.sendall(header + contents)
-        except error, msg:
-            logger.log("Error sending NNTSC_UNSUBSCRIBE for %s: %s" % (colid, msg[1]))
+        except error:
+            logger.log("Error sending NNTSC_UNSUBSCRIBE for %s: %s" % (colid, error))
             return -1
 
         return 0
@@ -125,8 +126,8 @@ class NNTSCClient:
 
         try:
             self.sock.sendall(header + contents)
-        except error, msg:
-            logger.log("Error sending NNTSC_MATRIX for %s: %s" % (col, msg[1]))
+        except error:
+            logger.log("Error sending NNTSC_MATRIX for %s: %s" % (col, error))
             return -1
 
         return 0
@@ -153,8 +154,8 @@ class NNTSCClient:
 
         try:
             self.sock.sendall(header + contents)
-        except error, msg:
-            logger.log("Error sending NNTSC_AGGREGATE for %s: %s" % (col, msg[1]))
+        except error:
+            logger.log("Error sending NNTSC_AGGREGATE for %s: %s" % (col, error))
             return -1
 
         return 0
@@ -183,8 +184,8 @@ class NNTSCClient:
 
         try:
             self.sock.sendall(header + contents)
-        except error, msg:
-            logger.log("Error sending NNTSC_PERCENTILE for %s: %s" % (col, msg[1]))
+        except error:
+            logger.log("Error sending NNTSC_PERCENTILE for %s: %s" % (col, error))
             return -1
 
         return 0
@@ -197,8 +198,8 @@ class NNTSCClient:
 
         try:
             received = self.sock.recv(256000)
-        except error, msg:
-            logger.log("Error receiving data from client: %s" % (msg[1]))
+        except error:
+            logger.log("Error receiving data from client: %s" % error)
             return -1
 
         if len(received) == 0:
@@ -258,7 +259,7 @@ class NNTSCClient:
 
         if header[1] == NNTSC_HISTORY:
             compressed = self.buf[header_end:total_len]
-            uncompressed = compressed.decode("zlib")
+            uncompressed = zlib.decompress(compressed)
             name, stream_id, data, more, binsize = pickle.loads(uncompressed)
             msgdict['collection'] = name
             msgdict['streamid'] = stream_id

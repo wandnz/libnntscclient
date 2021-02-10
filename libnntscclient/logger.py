@@ -51,9 +51,8 @@ def createLogger(flag, logfile, name):
         #logging.basicConfig(filename="/tmp/nntsc.log", format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 
 def log(msg):
-
     if not backgrounded:
-        print >> sys.stderr, time.strftime("%d %b %Y %H:%M:%S"), msg
+        print(time.strftime("%d %b %Y %H:%M:%S"), msg, file=sys.stderr)
     else:
         logger.debug(msg)
 
