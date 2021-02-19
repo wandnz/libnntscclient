@@ -1,3 +1,9 @@
+libnntsc-client (1.9-1) unstable; urgency=low
+
+  * Update to use python3 rather than python2.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Fri, 19 Feb 2021 14:26:11 +1300
+
 libnntsc-client (1.8-2) unstable; urgency=low
 
   * Add Buster packages (bintray needs a new version after 365 days).
