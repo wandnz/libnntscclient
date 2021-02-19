@@ -45,8 +45,8 @@ jobs:
       - name: Store packages for publishing
         run: |
           export DIRNAME=${{ matrix.target.distro }}_${{ matrix.target.codename }}
-          mkdir -p packages/${{ env.DIRNAME }}
-          cp ../*.deb packages/${{ env.DIRNAME }}/
+          mkdir -p packages/${DIRNAME}
+          cp ../*.deb packages/${DIRNAME}/
 
       - name: Store artifacts for checking
         uses: actions/upload-artifact@v2
