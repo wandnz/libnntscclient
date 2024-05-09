@@ -2,7 +2,7 @@ libnntsc-client (1.9-3) unstable; urgency=low
 
   * Build packages for Debian Bullseye, Bookworm and Ubuntu Jammy.
 
- -- Brendon Jones <brendon.jones@gmail.com>  Mon, 26 Feb 2021 17:02:27 +1300
+ -- Brendon Jones <brendon.jones@gmail.com>  Mon, 26 Feb 2024 17:02:27 +1300
 
 libnntsc-client (1.9-2) unstable; urgency=low
 
