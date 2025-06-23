@@ -1,3 +1,9 @@
+libnntsc-client (1.9-4) unstable; urgency=low
+
+  * Build packages for Ubuntu Noble.
+
+ -- Brendon Jones <brendon.jones@gmail.com>  Mon, 23 Jun 2025 21:36:28 +1200
+
 libnntsc-client (1.9-3) unstable; urgency=low
 
   * Build packages for Debian Bullseye, Bookworm and Ubuntu Jammy.
